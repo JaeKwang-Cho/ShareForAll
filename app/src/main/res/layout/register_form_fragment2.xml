@@ -1,15 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterForm2">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/phone_number_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/put_phone_number" />
+
+            <EditText
+                android:id="@+id/phone_number_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="numberDecimal"
+                android:selectAllOnFocus="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/age_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="12dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number_container">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/put_age" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/elderly" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/young" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/precaution2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="128dp"
+            android:text="@string/precaution2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_container" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

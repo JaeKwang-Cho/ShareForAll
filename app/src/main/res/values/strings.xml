@@ -26,6 +26,13 @@
         (Some precautions)\n
         1. blah blah\n
         2. hah hah</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="put_phone_number">Enter your phone number</string>
+    <string name ="phone_number">XXX-XXXX-XXXX</string>
+    <string name="put_age">Is it okay to ask your age?</string>
+    <string name="elderly">Elderly</string>
+    <string name ="young">Young</string>
+    <string name="precaution2">
+        (Second precautions)\n
+        1. blah blah\n
+        2. hah hah</string>
 </resources>
