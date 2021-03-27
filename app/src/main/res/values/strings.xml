@@ -15,4 +15,17 @@
     <string name="next">next</string>
     <string name="prev">prev</string>
     <string name="cancel">cancel</string>
+    <string name="nickname">nickname</string>
+    <string name="email">Pipa_cat98@konkuk.ac.kr</string>
+    <string name="passwords">************</string>
+    <string name="put_nickname">Enter your nickname</string>
+    <string name="put_email">Enter your email (Currently using)</string>
+    <string name="put_passwords">Enter your passwords (more than 10 letters)</string>
+    <string name="put_passwords_again">Enter your passwords (2nd)</string>
+    <string name="precaution1">
+        (Some precautions)\n
+        1. blah blah\n
+        2. hah hah</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
