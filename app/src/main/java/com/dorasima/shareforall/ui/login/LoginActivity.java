@@ -5,6 +5,8 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.ui.login.LoginViewModel;
 import com.dorasima.shareforall.ui.login.LoginViewModelFactory;
+import com.dorasima.shareforall.ui.register.RegisterActivity;
 
 import java.util.function.ToDoubleBiFunction;
 
@@ -32,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // 뷰모델 개체
     private LoginViewModel loginViewModel;
+    private Context loginActivity = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -137,6 +141,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //Todo: 아이디 만들기 만들기
+                Intent register = new Intent(loginActivity, RegisterActivity.class);
+                startActivity(register);
             }
         });
 

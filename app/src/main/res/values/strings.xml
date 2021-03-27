@@ -10,5 +10,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="action_register">Register</string>
     <string name="action_forgot">Forgot</string>
-    <string name="Title">ShareForAll</string>
+    <string name="title">ShareForAll</string>
+    <!-- Strings related to register -->
+    <string name="next">next</string>
+    <string name="prev">prev</string>
+    <string name="cancel">cancel</string>
 </resources>
