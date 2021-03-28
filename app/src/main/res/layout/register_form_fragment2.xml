@@ -5,6 +5,8 @@
     android:id="@+id/register2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ui.register.RegisterForm2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,17 +62,18 @@
                 android:text="@string/put_age" />
 
             <RadioGroup
+                android:id="@+id/age_group"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/elderlyButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/elderly" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/youngButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/young" />

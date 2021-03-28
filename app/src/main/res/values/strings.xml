@@ -6,7 +6,7 @@
     <string name="action_sign_in">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password must be >10 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="action_register">Register</string>
     <string name="action_forgot">Forgot</string>
@@ -22,6 +22,12 @@
     <string name="put_email">Enter your email (Currently using)</string>
     <string name="put_passwords">Enter your passwords (more than 10 letters)</string>
     <string name="put_passwords_again">Enter your passwords (2nd)</string>
+    <string name="invalid_nickname">nickname must be >5 characters</string>
+    <string name="invalid_email">Not a valid email format</string>
+    <string name="discord_passwords">Passwords do not match</string>
+    <string name="invalid_phoneNumber">Not a valid phone number</string>
+    <string name="unselected1">Please select </string>
+    <string name="unselected2">your age</string>
     <string name="precaution1">
         (Some precautions)\n
         1. blah blah\n
