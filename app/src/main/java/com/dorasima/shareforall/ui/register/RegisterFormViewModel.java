@@ -1,5 +1,6 @@
 package com.dorasima.shareforall.ui.register;
 
+import android.util.Log;
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
@@ -8,20 +9,35 @@ import androidx.lifecycle.ViewModel;
 
 import com.dorasima.shareforall.R;
 
+import java.time.LocalDate;
+
 public class RegisterFormViewModel extends ViewModel {
-    // 프래그먼트들 끼리
-    private MutableLiveData<RegisterForm> fragment1 = new MutableLiveData<>();
-    private MutableLiveData<RegisterForm2> frament2 = new MutableLiveData<>();
+    // 입력 데이터 저장용
+    private NewUserData newUserData = new NewUserData(null,null,null,null,null);
     // 입력 확인용
     private MutableLiveData<RegisterForm1State> form1State = new MutableLiveData<>();
     private MutableLiveData<RegisterForm2State> form2State = new MutableLiveData<>();
 
-    public LiveData<RegisterForm> getLiveData1(){ return fragment1;}
-    public LiveData<RegisterForm2> getLiveData2(){ return frament2;}
     public LiveData<RegisterForm1State> getForm1State(){ return form1State;}
     public LiveData<RegisterForm2State> getForm2State(){return form2State;}
+    public NewUserData getNewUserData(){
+        if(newUserData == null){
+            return newUserData = new NewUserData(null,null,null,null,null);
+        }else{
+            return newUserData;
+        }
+    }
 
     public void registerDataChanged(String nickname,String email,String password , String password2) {
+        if(nickname!=null){
+            newUserData.setNickname(nickname);
+        }
+        if(email!=null){
+            newUserData.setEmail(email);
+        }
+        if(password!=null){
+            newUserData.setPassword(password);
+        }
         if (!isNicknameValid(nickname)) {
             form1State.setValue(new RegisterForm1State(R.string.invalid_nickname, null ,null,null));
         }
@@ -40,11 +56,15 @@ public class RegisterFormViewModel extends ViewModel {
     }
 
     public void registerData2Changed(String phoneNumber){
+        newUserData.setPhoneNumber(phoneNumber);
         if(!isPhoneNumberValid(phoneNumber)){
             form2State.setValue(new RegisterForm2State(R.string.invalid_phoneNumber));
         }else{
             form2State.setValue(new RegisterForm2State(true));
         }
+    }
+    public void registerData2Changed2(Integer isOld){
+        newUserData.setIsOld(isOld);
     }
 
     private boolean isNicknameValid(String username) {

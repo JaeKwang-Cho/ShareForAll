@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class RegisterForm2 extends Fragment {
 
     private RegisterFormViewModel mViewModel;
 
-    RadioButton selectedButton = null;
+    private RadioButton selectedButton = null;
     boolean selected = false;
     private EditText phoneNumberForm;
     private RadioGroup ageForm;
@@ -40,17 +41,22 @@ public class RegisterForm2 extends Fragment {
     ) {
         View view = inflater.inflate(R.layout.register_form_fragment2, container, false);
 
-        EditText phoneNumberForm = view.findViewById(R.id.phone_number_form);
-        RadioGroup ageForm = view.findViewById(R.id.age_group);
-        RadioButton elderlyButton = view.findViewById(R.id.elderlyButton);
-        RadioButton youngButton = view.findViewById(R.id.youngButton);
+        phoneNumberForm = view.findViewById(R.id.phone_number_form);
+        ageForm = view.findViewById(R.id.age_group);
+        elderlyForm = view.findViewById(R.id.elderlyButton);
+        youngForm = view.findViewById(R.id.youngButton);
 
-        mViewModel = new ViewModelProvider(this).get(RegisterFormViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(RegisterFormViewModel.class);
 
         ageForm.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 selectedButton = view.findViewById(radioGroup.getCheckedRadioButtonId());
+                if(selectedButton.getText() == "Elderly"){
+                    mViewModel.registerData2Changed2(1);
+                }else{
+                    mViewModel.registerData2Changed2(0);
+                }
                 selected = true;
             }
         });
@@ -62,12 +68,12 @@ public class RegisterForm2 extends Fragment {
                     phoneNumberForm.setError(getString(registerForm2State.getPhoneNumberError()));
                 }
                 if(!selected){
-                    elderlyButton.setError(getString(R.string.unselected1));
-                    youngButton.setError(getString(R.string.unselected2));
+                    elderlyForm.setError(getString(R.string.unselected1));
+                    youngForm.setError(getString(R.string.unselected2));
                 }
                 if(registerForm2State.isDataValid() && selected){
-                    elderlyButton.setError(null);
-                    youngButton.setError(null);
+                    elderlyForm.setError(null);
+                    youngForm.setError(null);
                     getActivity().findViewById(R.id.register_next).setEnabled(registerForm2State.isDataValid());
                 }
             }
@@ -75,22 +81,16 @@ public class RegisterForm2 extends Fragment {
 
         phoneNumberForm.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
                 mViewModel.registerData2Changed(phoneNumberForm.getText().toString());
             }
         });
 
+
         return view;
     }
-
 }

@@ -10,7 +10,6 @@ import java.io.IOException;
 public class LoginDataSource {
     
     public Result<LoggedInUser> login(String username, String password) {
-
         try {
             // TODO: 여기서 Pool(?)이랑 입력값 비교하여서 유저 권한 부여
             LoggedInUser fakeUser = new LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe");

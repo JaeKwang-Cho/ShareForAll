@@ -36,6 +36,7 @@ public class RegisterForm extends Fragment {
         return new RegisterForm();
     }
 
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState
@@ -47,7 +48,7 @@ public class RegisterForm extends Fragment {
         password_form = view.findViewById(R.id.password_form);
         password2_form = view.findViewById(R.id.password2_form);
 
-        mViewModel = new ViewModelProvider(this).get(RegisterFormViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(RegisterFormViewModel.class);
 
         mViewModel.getForm1State().observe(getViewLifecycleOwner(), new Observer<RegisterForm1State>() {
             @Override // 실시간으로 입력값 체크
@@ -95,6 +96,8 @@ public class RegisterForm extends Fragment {
         email_form.addTextChangedListener(afterTextChangedListener);
         password_form.addTextChangedListener(afterTextChangedListener);
         password2_form.addTextChangedListener(afterTextChangedListener);
+
+
 
         return view;
     }

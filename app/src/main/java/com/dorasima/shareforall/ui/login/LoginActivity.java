@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.ui.register.RegisterActivity;
-import com.dorasima.shareforall.ui.register.RegisterActivity2;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -161,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
     public void toRegisterActivityBtn(View view){
-        Intent register = new Intent(this, RegisterActivity2.class);
+        Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(register);
     }
 }
