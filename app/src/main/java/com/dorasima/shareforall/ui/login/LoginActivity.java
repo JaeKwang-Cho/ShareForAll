@@ -6,6 +6,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,12 +27,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.DBClass;
+import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.ui.register.RegisterActivity;
+
+import java.util.Date;
+
+import static com.dorasima.shareforall.data.DBTable.*;
 
 public class LoginActivity extends AppCompatActivity {
 
     // 뷰모델 개체
     private LoginViewModel loginViewModel;
+    private LoggedInUser loggedInUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
         // 뷰
-        final EditText usernameEditText = findViewById(R.id.username);
+        final EditText emailEditText = findViewById(R.id.email);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final Button registerButton = findViewById(R.id.register);
@@ -54,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 }                
                 loginButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
+                    emailEditText.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
@@ -101,11 +111,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             // 텍스트가 바뀌면 호출 되는 메서드
             public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                loginViewModel.loginDataChanged(emailEditText.getText().toString(), passwordEditText.getText().toString());
             }
         };
         // 리스너 설정
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
+        emailEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
 
         // 키보드 완료 버튼 리스너
@@ -113,7 +123,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    if(getAuthentication(emailEditText.getText().toString(),passwordEditText.getText().toString())){
+                        Log.d("login", loggedInUser.getNickName());
+                        Log.d("login",loggedInUser.getEmail());
+                        Log.d("login",loggedInUser.getPhoneNumber());
+                        Log.d("login",loggedInUser.getIsOld().toString());
+                        Log.d("login",loggedInUser.getDate());
+                        loginViewModel.login(loggedInUser);
+                    }else{
+                        Toast toast = Toast.makeText(getApplicationContext(),R.string.login_failed,Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
                 return false;
             }
@@ -124,7 +144,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                if(getAuthentication(emailEditText.getText().toString(),passwordEditText.getText().toString())){
+                    Log.d("login", loggedInUser.getNickName());
+                    Log.d("login",loggedInUser.getEmail());
+                    Log.d("login",loggedInUser.getPhoneNumber());
+                    Log.d("login",loggedInUser.getIsOld().toString());
+                    Log.d("login",loggedInUser.getDate());
+                    loginViewModel.login(loggedInUser);
+                }else{
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.login_failed,Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
@@ -162,5 +192,42 @@ public class LoginActivity extends AppCompatActivity {
     public void toRegisterActivityBtn(View view){
         Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(register);
+    }
+
+    private boolean getAuthentication(String email, String password){
+        Log.d("login",email);
+        Log.d("login",password);
+        DBClass dbClass = new DBClass(getApplication());
+        SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
+
+        String sql1 = "select * from "+TABLE;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql1,null);
+
+        cursor.moveToFirst();
+        while(cursor.moveToNext()){
+            int em_pos = cursor.getColumnIndex(EMAIL);
+            String em = cursor.getString(em_pos);
+            int pw_pos = cursor.getColumnIndex(PASSWORD);
+            String pw = cursor.getString(pw_pos);
+            if(email.equals(em) && password.equals(pw)){
+                int nn_pos = cursor.getColumnIndex(NICKNAME);
+                String nn = cursor.getString(nn_pos);
+                int pn_pos = cursor.getColumnIndex(PHONE_NUMBER);
+                String pn = cursor.getString(pn_pos);
+                int age_pos = cursor.getColumnIndex(AGE);
+                Integer age = cursor.getInt(age_pos);
+                int date_pos = cursor.getColumnIndex(DATE);
+                String date = cursor.getString(date_pos);
+                Log.d("login",em);
+                Log.d("login",pw);
+                Log.d("login",nn);
+                Log.d("login",pn);
+                Log.d("login",age.toString());
+                Log.d("login",date);
+                loggedInUser = new LoggedInUser(nn,email,pn,age,date);
+                return true;
+            }
+        }
+        return false;
     }
 }

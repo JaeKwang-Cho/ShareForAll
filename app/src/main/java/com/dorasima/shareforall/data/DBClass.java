@@ -6,20 +6,23 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import static com.dorasima.shareforall.data.DBTable.*;
+
 public class DBClass extends SQLiteOpenHelper {
     public DBClass(@Nullable Context context) {
-        super(context, "login_data.db", null, 1);
+        super(context, TABLE, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql =  "create table login_data_table("
-                + "idx integer primary key autoincrement, "
-                + "nickname text not null, "
-                + "email text not null, "
-                + "password text not null, "
-                + "phonenumver text not null, "
-                + "age date not null"
+        String sql =  "create table if not exists "+TABLE+" ("
+                + INDEX+" integer primary key autoincrement, "
+                + NICKNAME+" text not null, "
+                + EMAIL+" text not null, "
+                + PASSWORD+" text not null, "
+                + PHONE_NUMBER+" text not null, "
+                + AGE+" integer not null, "
+                + DATE+" date not null"
                 + ")";
 
         sqLiteDatabase.execSQL(sql);

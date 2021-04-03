@@ -1,6 +1,11 @@
 package com.dorasima.shareforall.data;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.dorasima.shareforall.data.model.LoggedInUser;
+
+import java.util.Date;
 
 /**
  * 권한을 요청하고, 데이터 소스?에서 사용자 정보를 요청하고
@@ -46,8 +51,13 @@ public class LoginRepository {
     }
 
     // Result 제네릭 클래스 반환
-    public Result<LoggedInUser> login(String username, String password) {
-        Result<LoggedInUser> result = dataSource.login(username, password);
+    public Result<LoggedInUser> login(LoggedInUser input) {
+        Log.d("loginRepository", input.getNickName());
+        Log.d("loginRepository",input.getEmail());
+        Log.d("loginRepository",input.getPhoneNumber());
+        Log.d("loginRepository",input.getIsOld().toString());
+        Log.d("loginRepository",input.getDate());
+        Result<LoggedInUser> result = dataSource.login(input);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }

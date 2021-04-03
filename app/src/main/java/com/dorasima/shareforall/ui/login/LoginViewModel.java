@@ -11,6 +11,8 @@ import com.dorasima.shareforall.data.Result;
 import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.R;
 
+import java.util.Date;
+
 public class LoginViewModel extends ViewModel {
 
     // 로그인 폼 정보
@@ -30,14 +32,14 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public void login(LoggedInUser input) {
         // 사용자 정보를 저장
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<LoggedInUser> result = loginRepository.login(input);
 
         // Result 으로 확인
         if (result instanceof Result.Success) {
             LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getNickName())));
         }
         else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
