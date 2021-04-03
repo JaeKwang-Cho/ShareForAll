@@ -49,7 +49,7 @@ public class LoginViewModel extends ViewModel {
     // 리스너의 메서드로 반복적으로 실행 됨.
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
+            loginFormState.setValue(new LoginFormState(R.string.invalid_email_input, null));
         }
         else if (!isPasswordValid(password)) {
             loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));

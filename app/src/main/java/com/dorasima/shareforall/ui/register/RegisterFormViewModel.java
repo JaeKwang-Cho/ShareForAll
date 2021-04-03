@@ -92,7 +92,7 @@ public class RegisterFormViewModel extends ViewModel {
     }
 
     private boolean isPhoneNumberValid(String phoneNumber){
-        return phoneNumber !=null && phoneNumber.trim().length()>11;
+        return phoneNumber !=null && phoneNumber.trim().length()>10;
     }
 
 
