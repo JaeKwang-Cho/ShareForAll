@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.model.LoggedInUser;
+import com.dorasima.shareforall.ui.find.FindActivity;
 import com.dorasima.shareforall.ui.register.RegisterActivity;
 
 import java.util.Date;
@@ -163,7 +164,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                //Todo: 아이디 만들기 만들기
                 toRegisterActivityBtn(v);
             }
         });
@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                // Todo: 아이디 찾기 만들기
+                toFindActivityBtn(v);
             }
         });
     }
@@ -192,6 +192,10 @@ public class LoginActivity extends AppCompatActivity {
     public void toRegisterActivityBtn(View view){
         Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(register);
+    }
+    public void toFindActivityBtn(View view){
+        Intent find = new Intent(getApplicationContext(), FindActivity.class);
+        startActivity(find);
     }
 
     private boolean getAuthentication(String email, String password){
