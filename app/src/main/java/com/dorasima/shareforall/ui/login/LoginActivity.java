@@ -203,6 +203,7 @@ public class LoginActivity extends AppCompatActivity {
         String sql1 = "select * from "+TABLE;
         Cursor cursor = sqLiteDatabase.rawQuery(sql1,null);
 
+        // SQL 아직도 잘 모르겠음..
         cursor.moveToFirst();
         while(cursor.moveToNext()){
             int em_pos = cursor.getColumnIndex(EMAIL);
