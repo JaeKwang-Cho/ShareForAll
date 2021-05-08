@@ -1,15 +1,16 @@
 # ShareForAll
 K-Lab 5
-
-1. 테스트 중이빈다. 컴파일 되는지 확인 해주세요.
-2. jdk1.8.0_271
-3. 그냥 커뮤니티면, 노인계정 젊은이 계정 구분도 필요없겠죠?
-
-Week 8 – Project Plan (Presentation)
-
-Week 9 – Project architecture Design
+(jdk1.8.0_271)
 
 Week 10 – Prototype production1: complete mock-up 
+(2012-05-08. 14:31)
+- 간단하게 틀 잡았는데, (왜 error가 뜨지... 근데 왜 작동할까.... SDK 문제인가...) 무튼 테스트 부탁드립니다.
+- 이슈는
+  1. 글 작성 (사진촬영/첨부, 글 올리고, 그걸 리스트에 최신화)
+  2. 마이페이지에서 fragment -> viewpager -> activity로 타고가서 어떻게 finish()를 걸건지..
+  3. 이벤트랑 게임있는 곳은 계획대로(?)사진만 보여주시죠 ㅋㅋㅋㅋ
+  4. 서버...안하는 걸로.
+- 그 외의 것은 열심히 하다보면 해낼 수 있을..거....에요...
 
 Week 11 – market demand survey3 : 
 
