@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,6 +31,7 @@ import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.ui.find.FindActivity;
+import com.dorasima.shareforall.ui.main.MainActivity;
 import com.dorasima.shareforall.ui.register.RegisterActivity;
 
 import java.util.Date;
@@ -41,11 +43,11 @@ public class LoginActivity extends AppCompatActivity {
     // 뷰모델 개체
     private LoginViewModel loginViewModel;
     private LoggedInUser loggedInUser;
+    public Context LoginContext = this;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        super.onCreate(savedInstanceState); setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
         // 뷰
@@ -62,12 +64,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
                     return;
-                }                
-                loginButton.setEnabled(loginFormState.isDataValid());
+                } loginButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     emailEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
+                } if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
             }
@@ -75,18 +75,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // LoginResult LiveData 의 Observer.onChanged()으로 최신 값을 가져온다.
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override 
+            @Override
             public void onChanged(@Nullable LoginResult loginResult) {
                 if (loginResult == null) {
                     return;
                 }
                 // 입력값 체크
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
+                loadingProgressBar.setVisibility(View.GONE); if (loginResult.getError() != null) {
                     // Todo: 로그인 실패
                     showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
+                } if (loginResult.getSuccess() != null) {
                     // Todo: 로그인 성공
                     updateUiWithUser(loginResult.getSuccess());
                 }
@@ -124,19 +122,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if(getAuthentication(emailEditText.getText().toString(),passwordEditText.getText().toString())){
+                    if (getAuthentication(emailEditText.getText().toString(), passwordEditText.getText().toString())) {
                         Log.d("login", loggedInUser.getNickName());
-                        Log.d("login",loggedInUser.getEmail());
-                        Log.d("login",loggedInUser.getPhoneNumber());
-                        Log.d("login",loggedInUser.getIsOld().toString());
-                        Log.d("login",loggedInUser.getDate());
-                        loginViewModel.login(loggedInUser);
-                    }else{
-                        Toast toast = Toast.makeText(getApplicationContext(),R.string.login_failed,Toast.LENGTH_SHORT);
+                        Log.d("login", loggedInUser.getEmail());
+                        Log.d("login", loggedInUser.getPhoneNumber());
+                        Log.d("login", loggedInUser.getIsOld().toString());
+                        Log.d("login", loggedInUser.getDate()); loginViewModel.login(loggedInUser);
+                        Intent intent = new Intent(LoginContext, MainActivity.class); startActivity(intent);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast toast = Toast.makeText(getApplicationContext(), R.string.login_failed, Toast.LENGTH_SHORT);
                         toast.show();
                     }
-                }
-                return false;
+                } return false;
             }
         });
 
@@ -145,15 +144,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                if(getAuthentication(emailEditText.getText().toString(),passwordEditText.getText().toString())){
+                if (getAuthentication(emailEditText.getText().toString(), passwordEditText.getText().toString())) {
                     Log.d("login", loggedInUser.getNickName());
-                    Log.d("login",loggedInUser.getEmail());
-                    Log.d("login",loggedInUser.getPhoneNumber());
-                    Log.d("login",loggedInUser.getIsOld().toString());
-                    Log.d("login",loggedInUser.getDate());
-                    loginViewModel.login(loggedInUser);
-                }else{
-                    Toast toast = Toast.makeText(getApplicationContext(),R.string.login_failed,Toast.LENGTH_SHORT);
+                    Log.d("login", loggedInUser.getEmail());
+                    Log.d("login", loggedInUser.getPhoneNumber());
+                    Log.d("login", loggedInUser.getIsOld().toString());
+                    Log.d("login", loggedInUser.getDate()); loginViewModel.login(loggedInUser);
+                    Intent intent = new Intent(LoginContext, MainActivity.class); startActivity(intent);
+                    startActivity(intent);
+                }
+                else {
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.login_failed, Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -163,8 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                toRegisterActivityBtn(v);
+                loadingProgressBar.setVisibility(View.VISIBLE); toRegisterActivityBtn(v);
             }
         });
 
@@ -172,8 +172,7 @@ public class LoginActivity extends AppCompatActivity {
         forgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                toFindActivityBtn(v);
+                loadingProgressBar.setVisibility(View.VISIBLE); toFindActivityBtn(v);
             }
         });
     }
@@ -189,50 +188,37 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
-    public void toRegisterActivityBtn(View view){
+
+    public void toRegisterActivityBtn(View view) {
         Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(register);
     }
-    public void toFindActivityBtn(View view){
-        Intent find = new Intent(getApplicationContext(), FindActivity.class);
-        startActivity(find);
+
+    public void toFindActivityBtn(View view) {
+        Intent find = new Intent(getApplicationContext(), FindActivity.class); startActivity(find);
     }
 
-    private boolean getAuthentication(String email, String password){
-        Log.d("login",email);
-        Log.d("login",password);
+    private boolean getAuthentication(String email, String password) {
+        Log.d("login", email); Log.d("login", password);
         DBClass dbClass = new DBClass(getApplication());
         SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
 
-        String sql1 = "select * from "+TABLE;
-        Cursor cursor = sqLiteDatabase.rawQuery(sql1,null);
+        String sql1 = "select * from " + TABLE; Cursor cursor = sqLiteDatabase.rawQuery(sql1, null);
 
         // SQL 아직도 잘 모르겠음..
-        cursor.moveToFirst();
-        while(cursor.moveToNext()){
-            int em_pos = cursor.getColumnIndex(EMAIL);
-            String em = cursor.getString(em_pos);
-            int pw_pos = cursor.getColumnIndex(PASSWORD);
-            String pw = cursor.getString(pw_pos);
-            if(email.equals(em) && password.equals(pw)){
-                int nn_pos = cursor.getColumnIndex(NICKNAME);
-                String nn = cursor.getString(nn_pos);
+        cursor.moveToFirst(); while (cursor.moveToNext()) {
+            int em_pos = cursor.getColumnIndex(EMAIL); String em = cursor.getString(em_pos);
+            int pw_pos = cursor.getColumnIndex(PASSWORD); String pw = cursor.getString(pw_pos);
+            if (email.equals(em) && password.equals(pw)) {
+                int nn_pos = cursor.getColumnIndex(NICKNAME); String nn = cursor.getString(nn_pos);
                 int pn_pos = cursor.getColumnIndex(PHONE_NUMBER);
-                String pn = cursor.getString(pn_pos);
-                int age_pos = cursor.getColumnIndex(AGE);
-                Integer age = cursor.getInt(age_pos);
-                int date_pos = cursor.getColumnIndex(DATE);
-                String date = cursor.getString(date_pos);
-                Log.d("login",em);
-                Log.d("login",pw);
-                Log.d("login",nn);
-                Log.d("login",pn);
-                Log.d("login",age.toString());
-                Log.d("login",date);
-                loggedInUser = new LoggedInUser(nn,email,pn,age,date);
+                String pn = cursor.getString(pn_pos); int age_pos = cursor.getColumnIndex(AGE);
+                Integer age = cursor.getInt(age_pos); int date_pos = cursor.getColumnIndex(DATE);
+                String date = cursor.getString(date_pos); Log.d("login", em); Log.d("login", pw);
+                Log.d("login", nn); Log.d("login", pn); Log.d("login", age.toString());
+                Log.d("login", date); loggedInUser = new LoggedInUser(nn, email, pn, age, date);
                 return true;
             }
-        }
-        return false;
+        } return false;
     }
 }

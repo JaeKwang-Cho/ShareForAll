@@ -68,7 +68,7 @@ public class LoginViewModel extends ViewModel {
             return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         }
         else {
-            return !username.trim().isEmpty();
+            return username.trim().isEmpty();
         }
     }
 

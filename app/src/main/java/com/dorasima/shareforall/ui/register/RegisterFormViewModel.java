@@ -68,7 +68,7 @@ public class RegisterFormViewModel extends ViewModel {
     }
 
     private boolean isNicknameValid(String username) {
-        return username != null && username.trim().length() > 6;
+        return username != null && username.trim().length() > 4;
     }
 
     private boolean isEmailValid(String email) {
@@ -79,12 +79,12 @@ public class RegisterFormViewModel extends ViewModel {
             return Patterns.EMAIL_ADDRESS.matcher(email).matches();
         }
         else {
-            return !email.trim().isEmpty();
+            return email.trim().isEmpty();
         }
     }
 
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 10;
+        return password != null && password.trim().length() > 9;
     }
 
     private boolean isPasswordAccord(String password, String password2) {
@@ -92,7 +92,7 @@ public class RegisterFormViewModel extends ViewModel {
     }
 
     private boolean isPhoneNumberValid(String phoneNumber){
-        return phoneNumber !=null && phoneNumber.trim().length()>10;
+        return phoneNumber !=null && phoneNumber.trim().length()>9;
     }
 
 
