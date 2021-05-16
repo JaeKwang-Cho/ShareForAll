@@ -14,8 +14,9 @@ Week 10 – Prototype production1: complete mock-up 
 - 그 외의 것은 열심히 하다보면 해낼 수 있을..거....에요...
 
 Week 11 – market demand survey3 : 
-조재광 (2021-05-16. 11:58)
-- 인트로 넣었습니다.
+조재광 
+- 인트로 넣었습니다.(2021-05-16. 11:58)
+- 리스트 아이템 추가 기능 그리고 클릭 리스터 만들었습니다. (2021-05-16. 14:36)
 
 Week 12 - Prototype production2: implement basic as SNS phase 1
 
