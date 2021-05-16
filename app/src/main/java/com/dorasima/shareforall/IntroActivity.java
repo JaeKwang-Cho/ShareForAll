@@ -30,7 +30,7 @@ public class IntroActivity extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setTitle("");
         init();
-        handler.postDelayed(runnable,1000);
+        handler.postDelayed(runnable,2000);
     }
     private void init(){
         handler = new Handler();

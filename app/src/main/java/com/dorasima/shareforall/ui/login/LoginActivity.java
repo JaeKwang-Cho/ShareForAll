@@ -45,6 +45,11 @@ public class LoginActivity extends AppCompatActivity {
     private LoggedInUser loggedInUser;
     public Context LoginContext = this;
 
+    public void breakInBtn(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_login);
@@ -72,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         // LoginResult LiveData 의 Observer.onChanged()으로 최신 값을 가져온다.
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
@@ -128,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("login", loggedInUser.getPhoneNumber());
                         Log.d("login", loggedInUser.getIsOld().toString());
                         Log.d("login", loggedInUser.getDate()); loginViewModel.login(loggedInUser);
-                        Intent intent = new Intent(LoginContext, MainActivity.class); startActivity(intent);
+                        Intent intent = new Intent(LoginContext, MainActivity.class);
                         startActivity(intent);
                     }
                     else {

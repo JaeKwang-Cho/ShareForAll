@@ -1,6 +1,7 @@
 package com.dorasima.shareforall.ui.main.agora;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
+
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -25,10 +29,10 @@ public class AgoraFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    public static Integer IDs;
+    public Drawable defIcon;
+    private Context context;
+
     public AgoraFragment() {
     }
 
@@ -46,9 +50,18 @@ public class AgoraFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        defIcon = getResources().getDrawable(R.drawable.intro);
+        IDs = 0;
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        for(int i = 0;i<10;i++){
+            DummyContent.DummyItem item = new DummyContent.DummyItem(defIcon,IDs.toString(),"test","test details");
+            DummyContent.ITEMS.add(item);
+            IDs++;
+        }
+        context = getActivity();
     }
 
     @Override
@@ -67,7 +80,16 @@ public class AgoraFragment extends Fragment {
             else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS));
+            MyItemRecyclerViewAdapter itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
+            itemRecyclerViewAdapter.setOnItemClickListener(new MyItemRecyclerViewAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int pos) {
+                    Toast toast = Toast.makeText(context,pos+ " clicked",Toast.LENGTH_SHORT);
+                    toast.show();
+                    // todo: item click event
+                }
+            });
+            recyclerView.setAdapter(itemRecyclerViewAdapter);
         }
         return view;
     }
