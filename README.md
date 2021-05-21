@@ -18,6 +18,26 @@ Week 11 – market demand survey3 :
 - 인트로 넣었습니다.(2021-05-16. 11:58)
 - 리스트 아이템 추가 기능 그리고 클릭 리스터 만들었습니다. (2021-05-16. 14:36)
 
+Agora 기능
+1. 글작성 
+- 사진찍고, 글 쓰고 --> 리스트에 추가
+- 서버에 올릴지는 나중에
+2. 리스트에서 항목 누르면 본문 나오기
+- 이것도 서버에서 받아올지
+- 아니면 dummy로 그냥 보여줄지
+3. 댓글 기능
+- 댓글 창을 따로 만드는게 편함
+- 댓글 창에서 다른사람 댓글 보고
+- 댓글도 달기
+- 이것도 dummy vs 서버에서 진짜 받을지
+MyPage 기능
+- 로그아웃
+- 고객센터 기능 (이것도 그냥 dummy로 냅둘지 vs 서버로 받을지)
+Additional
+- 게임이랑
+- 광고는 그냥 보여주기만 하기
+- ㅎㅎ
+
 Week 12 - Prototype production2: implement basic as SNS phase 1
 
 Week 13 - Evaluation of Project Usability
