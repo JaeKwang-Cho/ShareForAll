@@ -28,7 +28,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.DBClass;
+import com.dorasima.shareforall.data.Message;
 import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.ui.find.FindActivity;
 import com.dorasima.shareforall.ui.main.MainActivity;
@@ -187,6 +189,10 @@ public class LoginActivity extends AppCompatActivity {
     // 여기서 뭔가 하는 코드
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
+        Client client = new Client();
+        Message msg = new Message();
+        msg.setMsg1(loggedInUser.getNickName(), loggedInUser.getEmail(), loggedInUser.getDate());
+        client.MsgSende(msg);
         // TODO : 로그인 성공
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
