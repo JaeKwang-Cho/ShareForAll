@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -51,6 +52,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        loginViewModel.logout();
+        // Toast toast = Toast.makeText(getApplicationContext(), "logout", Toast.LENGTH_SHORT);
+        // toast.show();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
@@ -77,8 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         // LoginResult LiveData 의 Observer.onChanged()으로 최신 값을 가져온다.
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
@@ -136,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("login", loggedInUser.getIsOld().toString());
                         Log.d("login", loggedInUser.getDate()); loginViewModel.login(loggedInUser);
                         Intent intent = new Intent(LoginContext, MainActivity.class);
+                        intent.putExtra("loggedInUser", loggedInUser);
                         startActivity(intent);
                     }
                     else {
@@ -156,8 +164,10 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("login", loggedInUser.getEmail());
                     Log.d("login", loggedInUser.getPhoneNumber());
                     Log.d("login", loggedInUser.getIsOld().toString());
-                    Log.d("login", loggedInUser.getDate()); loginViewModel.login(loggedInUser);
-                    Intent intent = new Intent(LoginContext, MainActivity.class); startActivity(intent);
+                    Log.d("login", loggedInUser.getDate());
+                    loginViewModel.login(loggedInUser);
+                    Intent intent = new Intent(LoginContext, MainActivity.class);
+                    intent.putExtra("loggedInUser", loggedInUser);
                     startActivity(intent);
                 }
                 else {
@@ -223,7 +233,8 @@ public class LoginActivity extends AppCompatActivity {
                 Integer age = cursor.getInt(age_pos); int date_pos = cursor.getColumnIndex(DATE);
                 String date = cursor.getString(date_pos); Log.d("login", em); Log.d("login", pw);
                 Log.d("login", nn); Log.d("login", pn); Log.d("login", age.toString());
-                Log.d("login", date); loggedInUser = new LoggedInUser(nn, email, pn, age, date);
+                Log.d("login", date);
+                loggedInUser = new LoggedInUser(nn, email, pn, age, date);
                 return true;
             }
         } return false;
