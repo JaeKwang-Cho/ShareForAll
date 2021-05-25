@@ -26,7 +26,7 @@ public class Client {
         {
             while(true)
             {
-                ia = InetAddress.getByName(getIP());//서버로 접속
+                ia = InetAddress.getByName(getIP());//서버로 접속 자동을 본인 아이피를 가져옴 테스트용
                 System.out.println("서버 접속 시도");
                 //ia = InetAddress.getByName("192.168.56.1");//서버로 접속
                 socket = new Socket(ia, port);
