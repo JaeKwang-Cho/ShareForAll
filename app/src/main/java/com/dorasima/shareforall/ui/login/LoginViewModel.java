@@ -21,6 +21,10 @@ public class LoginViewModel extends ViewModel {
     // 로그인한 사용자 정보
     private LoginRepository loginRepository;
 
+    public void logout(){
+        loginRepository.logout();
+    }
+
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
