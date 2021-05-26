@@ -26,9 +26,10 @@ public class Client {
         {
             while(true)
             {
-                ia = InetAddress.getByName(getIP());//서버로 접속 자동을 본인 아이피를 가져옴 테스트용
+               // ia = InetAddress.getByName(getIP());//서버로 접속 자동을 본인 아이피를 가져옴 테스트용
                 System.out.println("서버 접속 시도");
-                //ia = InetAddress.getByName("192.168.56.1");//서버로 접속
+                ia = InetAddress.getByName("192.168.56.1");//서버로 접속
+                System.out.println("아이피");
                 socket = new Socket(ia, port);
                 System.out.println("서버 접속 완료");
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());//직렬화를 위한 객체 생성
@@ -46,7 +47,7 @@ public class Client {
                 if(returnMsg.equals("1"))
                     break;
             }
-        } catch(IOException e) {System.err.println("서버 접속 오류, 접속IP :"+ia+" 접속 포트 : " + port);}
+        } catch(IOException e) {System.err.println("서버 접속 오류, 접속IP : "+ ia + " 접속 포트 : " + port);}
     }
 
     public static String getIP()

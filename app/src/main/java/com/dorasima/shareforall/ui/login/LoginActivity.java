@@ -189,10 +189,6 @@ public class LoginActivity extends AppCompatActivity {
     // 여기서 뭔가 하는 코드
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        Client client = new Client();
-        Message msg = new Message();
-        msg.setMsg1(loggedInUser.getNickName(), loggedInUser.getEmail(), loggedInUser.getDate());
-        client.MsgSende(msg);
         // TODO : 로그인 성공
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

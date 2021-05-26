@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.dorasima.shareforall.data.Client;
+import com.dorasima.shareforall.data.Message;
 import com.dorasima.shareforall.ui.login.LoginActivity;
 import com.dorasima.shareforall.ui.main.MainActivity;
 
@@ -15,6 +17,10 @@ public class IntroActivity extends AppCompatActivity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            Client client = new Client();
+            Message msg = new Message();
+            msg.setMsg1("start","1234","Email");
+            client.MsgSende(msg);
             Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
