@@ -7,6 +7,7 @@
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_email_input">Not a valid email</string>
     <string name="invalid_password">Password must be >10 characters</string>
+    <string name="invalid_profile">invalid_profile</string>
     <string name="login_failed">"Login failed"</string>
     <string name="action_register">Register</string>
     <string name="action_forgot">Forgot</string>

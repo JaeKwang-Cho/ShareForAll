@@ -1,6 +1,7 @@
 package com.dorasima.shareforall.ui.main.agora;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.ui.main.MainActivity;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 
 import java.util.List;
@@ -33,8 +35,8 @@ public class AgoraFragment extends Fragment {
     public Drawable defIcon;
     private Context context;
 
-    public AgoraFragment() {
-    }
+    private MyItemRecyclerViewAdapter itemRecyclerViewAdapter;
+    private RecyclerView recyclerView;
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
@@ -56,11 +58,13 @@ public class AgoraFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        /*
         for(int i = 0;i<10;i++){
-            DummyContent.DummyItem item = new DummyContent.DummyItem(defIcon,IDs.toString(),"test","test details");
+            DummyContent.DummyItem item = new DummyContent.DummyItem(MainActivity.loggedInUser.getNickName(), defIcon, defIcon, "test", "test details");
             DummyContent.ITEMS.add(item);
             IDs++;
         }
+        */
         context = getActivity();
     }
 
@@ -73,24 +77,44 @@ public class AgoraFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
             else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            MyItemRecyclerViewAdapter itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
+            itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
             itemRecyclerViewAdapter.setOnItemClickListener(new MyItemRecyclerViewAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int pos) {
-                    Toast toast = Toast.makeText(context,pos+ " clicked",Toast.LENGTH_SHORT);
-                    toast.show();
+                    Intent intent = new Intent(context,ArticleActivity.class);
+                    intent.putExtra("article",DummyContent.getDummyItem(pos));
+                    startActivity(intent);
+                    //Toast toast = Toast.makeText(context,pos+ " clicked",Toast.LENGTH_SHORT);
+                    //toast.show();
                     // todo: item click event
                 }
             });
             recyclerView.setAdapter(itemRecyclerViewAdapter);
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
+        itemRecyclerViewAdapter.setOnItemClickListener(new MyItemRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int pos) {
+                Intent intent = new Intent(context,ArticleActivity.class);
+                intent.putExtra("article",DummyContent.getDummyItem(pos));
+                startActivity(intent);
+                // todo: item click event
+            }
+        });
+        recyclerView.setAdapter(itemRecyclerViewAdapter);
     }
 }

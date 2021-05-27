@@ -1,5 +1,11 @@
 package com.dorasima.shareforall.ui.register;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,17 +14,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.ui.login.LoginActivity;
 
 public class RegisterForm2 extends Fragment {
 
@@ -28,12 +38,31 @@ public class RegisterForm2 extends Fragment {
     boolean selected = false;
     private EditText phoneNumberForm;
     private RadioGroup ageForm;
+    private ImageView profileView;
+    private Button selectBtn;
 
     public static RegisterForm2 newInstance() {
         return new RegisterForm2();
     }
     private RadioButton elderlyForm;
     private RadioButton youngForm;
+
+    private Bitmap profile;
+
+    public void getImageBtn(View view){
+        ((RegisterActivity)getActivity()).getImageBtn();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        profile = ((RegisterActivity)getActivity()).getProfileImage();
+        if(profile != null){
+            profileView.setImageBitmap(profile);
+            mViewModel.registerData2Changed(phoneNumberForm.getText().toString(), profileView.getDrawable());
+        }
+    }
 
     @Override
     public View onCreateView(
@@ -45,6 +74,10 @@ public class RegisterForm2 extends Fragment {
         ageForm = view.findViewById(R.id.age_group);
         elderlyForm = view.findViewById(R.id.elderlyButton);
         youngForm = view.findViewById(R.id.youngButton);
+        profileView = view.findViewById(R.id.register_profile);
+        selectBtn = view.findViewById(R.id.register_select);
+
+        selectBtn.setOnClickListener(this::getImageBtn);
 
         mViewModel = new ViewModelProvider(requireActivity()).get(RegisterFormViewModel.class);
 
@@ -86,11 +119,9 @@ public class RegisterForm2 extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void afterTextChanged(Editable editable) {
-                mViewModel.registerData2Changed(phoneNumberForm.getText().toString());
+                mViewModel.registerData2Changed(phoneNumberForm.getText().toString(), null);
             }
         });
-
-
         return view;
     }
 }

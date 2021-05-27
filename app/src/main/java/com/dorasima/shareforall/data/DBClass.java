@@ -22,7 +22,8 @@ public class DBClass extends SQLiteOpenHelper {
                 + PASSWORD+" text not null, "
                 + PHONE_NUMBER+" text not null, "
                 + AGE+" integer not null, "
-                + DATE+" date not null"
+                + DATE+" date not null, "
+                + PROFILE+" blob not null"
                 + ")";
 
         sqLiteDatabase.execSQL(sql);
