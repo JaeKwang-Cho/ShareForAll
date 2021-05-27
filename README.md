@@ -45,11 +45,14 @@ Week 12 - Prototype production2: implement basic as SNS phase 1
 Week 13 - Evaluation of Project Usability
 
 조재광 (2021-05-28. 00:00)
+
 Agora 기능
+
 - 글작성 (제목 + 본문 + 사진)
 - 글 작성한것 리스트에 올리기
 - 작성한 글 리스트에서 선택해서 보기
 Register 변경
+
 - 회원가입할때 갤러리에서 본인 프로필 사진 하나 선택해야합니다.
 - 그건 Mypage랑 본인이 쓴글에 상단에 박히게 됩니다
 
