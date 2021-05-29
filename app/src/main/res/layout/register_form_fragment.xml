@@ -10,7 +10,7 @@
     tools:context=".ui.register.RegisterForm">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
+        android:id="@+id/comments_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
