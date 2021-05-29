@@ -1,6 +1,7 @@
 package com.dorasima.shareforall.ui.main.comments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,10 +26,9 @@ public class CommentsFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    private RecyclerView recyclerView;
+    private MyCommentsRecyclerViewAdapter adapter;
+
     public CommentsFragment() {
     }
 
@@ -60,15 +60,23 @@ public class CommentsFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             }
             else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCommentsRecyclerViewAdapter(CommentsContent.ITEMS));
+            adapter = new MyCommentsRecyclerViewAdapter(CommentsContent.ITEMS);
+            recyclerView.setAdapter(adapter);
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter = new MyCommentsRecyclerViewAdapter(CommentsContent.ITEMS);
+        recyclerView.setAdapter(adapter);
     }
 }

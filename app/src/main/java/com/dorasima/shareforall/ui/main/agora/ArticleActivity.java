@@ -11,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 import com.dorasima.shareforall.ui.main.comments.CommentsActivity;
 
 public class ArticleActivity extends AppCompatActivity {
 
     private static DummyContent.DummyItem article;
+    private static LoggedInUser loggedInUser;
 
     private TextView nickname;
     private TextView title;
@@ -54,6 +56,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
     public void commentsActivityBtn(View view){
         Intent intent = new Intent(this, CommentsActivity.class);
+        intent.putExtra("loggedUser",article);
         startActivity(intent);
     }
 
