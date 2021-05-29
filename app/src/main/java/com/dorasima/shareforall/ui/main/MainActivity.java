@@ -7,7 +7,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.LoginRepository;
+import com.dorasima.shareforall.data.Message;
 import com.dorasima.shareforall.data.model.LoggedInUser;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Message msg = new Message();
+        msg.setMsg1("start","1234","Email");
+        Client client = new Client(msg);
+        client.start();
+
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
         ViewPager viewPager = findViewById(R.id.view_pager);
 

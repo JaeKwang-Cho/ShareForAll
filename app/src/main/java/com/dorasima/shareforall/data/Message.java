@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     // 타입0 = 새로고침(전체 작성글 목록 갖고오기), 타입1 = 로그인 요청, 타입2 = 회원가입, 타입3 = 글 업로드, 타입4 = 댓글
     private int Type = -1;
     private String NickName = "-1";
