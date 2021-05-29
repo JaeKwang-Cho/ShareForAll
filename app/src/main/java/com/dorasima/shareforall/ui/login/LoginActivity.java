@@ -1,14 +1,22 @@
 package com.dorasima.shareforall.ui.login;
 
+import android.Manifest;
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -48,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
     private LoggedInUser loggedInUser;
     public Context LoginContext = this;
 
+    String [] permission_list = {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+
     public void breakInBtn(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -59,6 +71,16 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.logout();
         // Toast toast = Toast.makeText(getApplicationContext(), "logout", Toast.LENGTH_SHORT);
         // toast.show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for(int a1 : grantResults){
+            if(a1 == PackageManager.PERMISSION_DENIED){
+                return ;
+            }
+        }
     }
 
     @Override
@@ -74,6 +96,10 @@ public class LoginActivity extends AppCompatActivity {
         final Button forgotButton = findViewById(R.id.forgot);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
+            requestPermissions(permission_list,0);
+        }
+
         // LoginFormState LiveData 의 Observer.onChanged()으로 최신 값을 가져온다.
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override // 실시간으로 입력값 체크
@@ -88,6 +114,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         // LoginResult LiveData 의 Observer.onChanged()으로 최신 값을 가져온다.
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
@@ -226,19 +254,36 @@ public class LoginActivity extends AppCompatActivity {
 
         // SQL 아직도 잘 모르겠음..
         cursor.moveToFirst(); while (cursor.moveToNext()) {
-            int em_pos = cursor.getColumnIndex(EMAIL); String em = cursor.getString(em_pos);
-            int pw_pos = cursor.getColumnIndex(PASSWORD); String pw = cursor.getString(pw_pos);
+            int em_pos = cursor.getColumnIndex(EMAIL);
+            String em = cursor.getString(em_pos);
+            Log.d("login", em);
+            int pw_pos = cursor.getColumnIndex(PASSWORD);
+            String pw = cursor.getString(pw_pos);
+            Log.d("login", pw);
             if (email.equals(em) && password.equals(pw)) {
-                int nn_pos = cursor.getColumnIndex(NICKNAME); String nn = cursor.getString(nn_pos);
+                int nn_pos = cursor.getColumnIndex(NICKNAME);
+                String nn = cursor.getString(nn_pos);
+                Log.d("login", nn);
                 int pn_pos = cursor.getColumnIndex(PHONE_NUMBER);
-                String pn = cursor.getString(pn_pos); int age_pos = cursor.getColumnIndex(AGE);
-                Integer age = cursor.getInt(age_pos); int date_pos = cursor.getColumnIndex(DATE);
-                String date = cursor.getString(date_pos); Log.d("login", em); Log.d("login", pw);
-                Log.d("login", nn); Log.d("login", pn); Log.d("login", age.toString());
+                String pn = cursor.getString(pn_pos);
+                Log.d("login", pn);
+                int age_pos = cursor.getColumnIndex(AGE);
+                Integer age = cursor.getInt(age_pos);
+                Log.d("login", age.toString());
+                int date_pos = cursor.getColumnIndex(DATE);
+                String date = cursor.getString(date_pos);
                 Log.d("login", date);
-                loggedInUser = new LoggedInUser(nn, email, pn, age, date);
+                int profile_pos = cursor.getColumnIndex(PROFILE);
+                Drawable profile = new BitmapDrawable(getResources(),getBitmap(cursor.getBlob(profile_pos)));
+
+                loggedInUser = new LoggedInUser(profile,nn, email, pn, age, date);
+
                 return true;
             }
         } return false;
+    }
+    public Bitmap getBitmap(byte[] bytes){
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+        return bitmap;
     }
 }

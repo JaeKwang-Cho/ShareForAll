@@ -82,17 +82,36 @@
 
         <TextView
             android:id="@+id/precaution2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="128dp"
+            android:layout_width="370dp"
+            android:layout_height="79dp"
             android:text="@string/precaution2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/age_container" />
+            app:layout_constraintTop_toBottomOf="@+id/register_select"
+            app:layout_constraintVertical_bias="0.212" />
+
+        <ImageView
+            android:id="@+id/register_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_container"
+            tools:src="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/register_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="select image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_profile" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

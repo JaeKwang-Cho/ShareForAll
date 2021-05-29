@@ -1,5 +1,8 @@
 package com.dorasima.shareforall.data.model;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -11,13 +14,15 @@ import java.util.Date;
  */
 public class LoggedInUser implements Parcelable {
 
+    private Drawable profile;
     private String nickName;
     private String email;
     private String phoneNumber;
     private Integer isOld;
     private String date;
 
-    public LoggedInUser( String nickName,String email,String phoneNumber,Integer isOld,String date) {
+    public LoggedInUser(Drawable profile, String nickName,String email,String phoneNumber,Integer isOld,String date) {
+        this.profile = profile;
         this.nickName = nickName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -25,6 +30,7 @@ public class LoggedInUser implements Parcelable {
         this.date = date;
     }
     public LoggedInUser(LoggedInUser input){
+        this.profile = input.getProfile();
         this.nickName = input.getNickName();
         this.email = input.getEmail();
         this.phoneNumber = input.getPhoneNumber();
@@ -48,6 +54,10 @@ public class LoggedInUser implements Parcelable {
         nickName = in.readString();
         email = in.readString();
         phoneNumber = in.readString();
+        Bitmap profileBit = (Bitmap)in.readParcelable(getClass().getClassLoader());
+        if( profileBit!= null){
+            profile = new BitmapDrawable(profileBit);
+        }
         if (in.readByte() == 0) {
             isOld = null;
         }
@@ -62,6 +72,13 @@ public class LoggedInUser implements Parcelable {
         dest.writeString(nickName);
         dest.writeString(email);
         dest.writeString(phoneNumber);
+        if( profile!= null){
+            Bitmap profileBit = (Bitmap)((BitmapDrawable) profile).getBitmap();
+            dest.writeParcelable(profileBit, flags);
+        }else{
+            dest.writeParcelable(null,flags);
+        }
+
         if (isOld == null) {
             dest.writeByte((byte) 0);
         }
@@ -76,6 +93,8 @@ public class LoggedInUser implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public Drawable getProfile(){return profile;}
 
     public String getNickName() {
         return nickName;

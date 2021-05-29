@@ -32,7 +32,6 @@ public class MypageFragment extends Fragment {
         }else{
             loggedInUser = null;
         }
-
     }
 
     @Override
@@ -57,6 +56,9 @@ public class MypageFragment extends Fragment {
         if(loggedInUser != null){
             userName.setText(loggedInUser.getNickName());
             userEmail.setText(loggedInUser.getEmail());
+            if(loggedInUser.getProfile() != null){
+                profileImage.setImageDrawable(loggedInUser.getProfile());
+            }
         }
 
         return view;

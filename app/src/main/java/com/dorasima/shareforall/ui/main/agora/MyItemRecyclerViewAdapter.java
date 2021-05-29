@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent.DummyItem;
@@ -45,7 +44,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mIcon.setImageDrawable(mValues.get(position).icon);
         holder.mIdView.setText(mValues.get(position).content);
-        holder.mContentView.setText(mValues.get(position).details);
+        holder.mContentView.setText(mValues.get(position).nickname);
     }
 
     public interface OnItemClickListener{
@@ -81,8 +80,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
             mView = view;
             mIcon = (ImageView) view.findViewById(R.id.iconImage);
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.article_title);
+            mContentView = (TextView) view.findViewById(R.id.article_writer);
         }
 
 
