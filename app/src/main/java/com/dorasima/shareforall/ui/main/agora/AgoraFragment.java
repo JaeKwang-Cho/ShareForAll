@@ -2,6 +2,8 @@ package com.dorasima.shareforall.ui.main.agora;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -16,10 +18,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.model.AgoraMessage;
 import com.dorasima.shareforall.ui.main.MainActivity;
 import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.dorasima.shareforall.ui.main.agora.dummy.DummyContent.AGORA_ITEMS;
 
 /**
  * A fragment representing a list of Items.
@@ -37,6 +43,9 @@ public class AgoraFragment extends Fragment {
 
     private MyItemRecyclerViewAdapter itemRecyclerViewAdapter;
     private RecyclerView recyclerView;
+
+    private AgoraMessage.ServerAgoraItem newAgoraItem = null;
+
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
@@ -57,6 +66,25 @@ public class AgoraFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+        }
+
+        GetAgoraList thread = new GetAgoraList();
+        thread.start();
+        try {
+            synchronized(thread){
+                thread.join();
+            }
+        }
+        catch (InterruptedException e) {
+            getActivity().finish();
+        }
+        AGORA_ITEMS = new ArrayList<>();
+        if(AgoraMessage.SERVER_ITEMS != null){
+            for(AgoraMessage.ServerAgoraItem item : AgoraMessage.SERVER_ITEMS){
+                Drawable icon = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(item.getIcon(), 0, item.getProfile().length));
+                Drawable profile = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(item.getProfile(), 0, item.getProfile().length));
+                AGORA_ITEMS.add(new DummyContent.DummyItem(item.nickname,icon,profile,item.title,item.content,item.comments_index));
+            }
         }
         /*
         for(int i = 0;i<10;i++){
@@ -84,7 +112,7 @@ public class AgoraFragment extends Fragment {
             else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
+            itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(AGORA_ITEMS);
             itemRecyclerViewAdapter.setOnItemClickListener(new MyItemRecyclerViewAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int pos) {
@@ -102,11 +130,26 @@ public class AgoraFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void refresh(){
+        boolean isAdded = true;
+        GetNewAgoraArticle thread = new GetNewAgoraArticle();
+        thread.start();
+        try {
+            synchronized(thread){
+                thread.join();
+            }
+        }
+        catch (InterruptedException e) {
+            isAdded = false;
+        }
 
-        itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS);
+        if(isAdded && newAgoraItem != null){
+            Drawable icon = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(newAgoraItem.getIcon(), 0, newAgoraItem.getProfile().length));
+            Drawable profile = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(newAgoraItem.getProfile(), 0, newAgoraItem.getProfile().length));
+            AGORA_ITEMS.add(new DummyContent.DummyItem(newAgoraItem.nickname,icon,profile,newAgoraItem.title,newAgoraItem.content,newAgoraItem.comments_index));
+        }
+
+        itemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(AGORA_ITEMS);
         itemRecyclerViewAdapter.setOnItemClickListener(new MyItemRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
@@ -117,5 +160,29 @@ public class AgoraFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(itemRecyclerViewAdapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    class GetAgoraList extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            // todo: Server 에 있는 AgoraList 가져오기
+            AgoraMessage.SERVER_ITEMS = null;
+        }
+    }
+
+    class GetNewAgoraArticle extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            // todo: 새로 들어온 agora article 가져오기
+            newAgoraItem = null;
+        }
     }
 }

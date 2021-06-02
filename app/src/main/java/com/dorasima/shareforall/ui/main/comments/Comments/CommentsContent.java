@@ -9,13 +9,11 @@ import java.util.Map;
 
 public class CommentsContent {
 
-    public static final List<CommentsItem> ITEMS = new ArrayList<CommentsItem>();
-    public static final Map<String, CommentsItem> ITEM_MAP = new HashMap<String, CommentsItem>();
+    public static  List<CommentsItem> COMMENTS = new ArrayList<CommentsItem>();
 
 
     public static void addItem(CommentsItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.nickname, item);
+        COMMENTS.add(item);
     }
 
     public static CommentsItem createCommentsItem(Drawable profile ,final String nickName, final String comments) {

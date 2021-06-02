@@ -22,20 +22,17 @@ import java.util.Map;
  */
 public class DummyContent {
 
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static List<DummyItem> AGORA_ITEMS = new ArrayList<DummyItem>();
 
     public static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.nickname, item);
-
+        AGORA_ITEMS.add(item);
     }
     public static DummyItem getDummyItem(int pos){
-        return ITEMS.get(pos);
+        return AGORA_ITEMS.get(pos);
     }
 
-    private DummyItem createDummyItem(String id, Drawable profile, Drawable icon, String title, String content){
-        return new DummyItem(id,profile,icon,title,content);
+    private DummyItem createDummyItem(String id, Drawable profile, Drawable icon, String title, String content,int comments_index){
+        return new DummyItem(id,profile,icon,title,content,comments_index);
     }
 
     private String makeDetails(int position) {
@@ -64,13 +61,15 @@ public class DummyContent {
         public final Drawable profile;
         public final String content;
         public final String title;
+        public final int comments_index;
 
-        public DummyItem(String nickname, Drawable profile, Drawable icon, String title, String content) {
+        public DummyItem(String nickname, Drawable profile, Drawable icon, String title, String content, int comments_index) {
             this.nickname = nickname;
             this.profile = profile;
             this.icon = icon;
             this.title = title;
             this.content = content;
+            this.comments_index = comments_index;
         }
 
         protected DummyItem(Parcel in) {
@@ -89,6 +88,7 @@ public class DummyContent {
             }else{
                 icon = null;
             }
+            comments_index = in.readInt();
         }
 
         public Drawable getProfile(){return profile;}
@@ -137,7 +137,7 @@ public class DummyContent {
             }else{
                 parcel.writeParcelable(null, i);
             }
-
+            parcel.writeInt(comments_index);
 
         }
     }

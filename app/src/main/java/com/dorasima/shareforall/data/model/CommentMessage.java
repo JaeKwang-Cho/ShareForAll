@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentMessage implements Serializable {
-    public static final List<ServerCommentsItem> COMMENTS_ITEMS = new ArrayList<ServerCommentsItem>();
+    public static List<ServerCommentsItem> COMMENTS_ITEMS = new ArrayList<ServerCommentsItem>();
 
     public static void addItem(ServerCommentsItem item){
         COMMENTS_ITEMS.add(item);

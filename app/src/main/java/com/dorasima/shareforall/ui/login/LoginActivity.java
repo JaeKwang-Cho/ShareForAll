@@ -41,6 +41,7 @@ import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.Message;
 import com.dorasima.shareforall.data.model.LoggedInUser;
+import com.dorasima.shareforall.data.model.LoggedMessage;
 import com.dorasima.shareforall.data.model.LoginAttemptMessage;
 import com.dorasima.shareforall.data.model.Message;
 import com.dorasima.shareforall.ui.find.FindActivity;
@@ -58,21 +59,48 @@ public class LoginActivity extends AppCompatActivity {
     private LoggedInUser loggedInUser;
     public Context LoginContext = this;
 
+    public static LoggedMessage loggedMessage;
+    LoginAttemptMessage loginAttemptMessage;
+
     String [] permission_list = {
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
-    private boolean sendLoginAttemptMessage(final LoginAttemptMessage loginAttemptMessage){
-        // todo: 여기에서 로그인 요청을 보내기
-        return false;
+    private LoggedMessage sendLoginAttemptMessage(final LoginAttemptMessage loginAttemptMessage){
+        // todo: 여기에서 LoginAttemptMessage 을 보내고 LoggedMessage 를 받기
+        this.loginAttemptMessage = loginAttemptMessage;
+
+        SendLoginAttemptMessageThread thread = new SendLoginAttemptMessageThread();
+        thread.start();
+        try {
+            synchronized(thread){
+                thread.join();
+            }
+        }
+        catch (InterruptedException e) {
+            return null;
+        }
+        if(loggedMessage == null){
+            return null;
+        }
+        return loggedMessage;
     }
 
     private boolean getAuthentication(String email, String password) {
 
         // todo: 여기서 로그인 원래 입력을 받고 인증을 부여합니다
-        boolean isCorrect = sendLoginAttemptMessage(new LoginAttemptMessage(email,password));
-        if(isCorrect){
+        LoggedMessage loggedMessage = sendLoginAttemptMessage(new LoginAttemptMessage(email,password));
+        if(loggedMessage != null){
             // todo: 여기서 loggedInUser 에다가, LoginMessage 값을 넣어주면 됩니다. 그리고 true 반환
+            Drawable profile = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(loggedMessage.getProfile(), 0, loggedMessage.getProfile().length));
+            loggedInUser = new LoggedInUser(profile,
+                                            loggedMessage.getNickName(),
+                                            loggedMessage.getEmail(),
+                                            loggedMessage.getPhoneNumber(),
+                                            loggedMessage.getIsOld(),
+                                            loggedMessage.getDate());
+
+            return true;
         }
 
         // 아래는 원래 있었던 코드니 무시
@@ -111,6 +139,16 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
             }
         } return false;
+    }
+
+    class SendLoginAttemptMessageThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+
+            // todo: loginAttemptMessage을 이용해서 loggedMessage 가져오기
+            loggedMessage = null;
+        }
     }
 
 
