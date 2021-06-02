@@ -90,6 +90,7 @@ public class AgoraFragment extends Fragment {
                 public void onItemClick(View view, int pos) {
                     Intent intent = new Intent(context,ArticleActivity.class);
                     intent.putExtra("article",DummyContent.getDummyItem(pos));
+                    intent.putExtra("loggedUser",((MainActivity)getActivity()).getLoggedInUserInfo());
                     startActivity(intent);
                     //Toast toast = Toast.makeText(context,pos+ " clicked",Toast.LENGTH_SHORT);
                     //toast.show();

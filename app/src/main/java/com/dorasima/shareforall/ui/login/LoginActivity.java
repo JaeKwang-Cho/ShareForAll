@@ -41,6 +41,7 @@ import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.Message;
 import com.dorasima.shareforall.data.model.LoggedInUser;
+import com.dorasima.shareforall.data.model.Message;
 import com.dorasima.shareforall.ui.find.FindActivity;
 import com.dorasima.shareforall.ui.main.MainActivity;
 import com.dorasima.shareforall.ui.register.RegisterActivity;
@@ -87,6 +88,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+
+        Message msg = new Message();
+        msg.setMsg1("start","1234","Email");
+        Client client = new Client(msg);
+        client.start();
 
         // 뷰
         final EditText emailEditText = findViewById(R.id.email);
