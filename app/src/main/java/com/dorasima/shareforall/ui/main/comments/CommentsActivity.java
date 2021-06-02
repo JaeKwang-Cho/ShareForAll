@@ -60,7 +60,7 @@ public class CommentsActivity extends AppCompatActivity {
         builder.setView(v1);
 
         builder.setPositiveButton("comment",listener);
-        builder.setNegativeButton("cancel",listener);
+        builder.setNegativeButton("cancel",null);
 
         builder.show();
     }
