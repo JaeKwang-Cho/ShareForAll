@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.dorasima.shareforall.data.Client;
+import com.dorasima.shareforall.data.model.Message;
 import com.dorasima.shareforall.ui.login.LoginActivity;
 import com.dorasima.shareforall.ui.main.MainActivity;
 
@@ -31,6 +33,8 @@ public class IntroActivity extends AppCompatActivity {
         bar.setTitle("");
         init();
         handler.postDelayed(runnable,2000);
+
+
     }
     private void init(){
         handler = new Handler();

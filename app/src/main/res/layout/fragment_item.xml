@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/comment_nickname"
-            android:layout_width="92dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:text="asdf"
@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/comment_comments"
-            android:layout_width="91dp"
+            android:layout_width="224dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:text="asdf"
