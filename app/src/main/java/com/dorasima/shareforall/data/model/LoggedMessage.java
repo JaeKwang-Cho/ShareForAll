@@ -27,4 +27,52 @@ public class LoggedMessage implements Serializable {
         this.isOld = isOld;
         this.date = date;
     }
+
+    public byte[] getProfile() {
+        return profile;
+    }
+
+    public void setProfile(byte[] profile) {
+        this.profile = profile;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getIsOld() {
+        return isOld;
+    }
+
+    public void setIsOld(Integer isOld) {
+        this.isOld = isOld;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

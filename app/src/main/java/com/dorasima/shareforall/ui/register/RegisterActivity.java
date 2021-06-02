@@ -21,6 +21,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.data.DBClass;
+import com.dorasima.shareforall.data.model.RegisterMessage;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -45,11 +47,27 @@ public class RegisterActivity extends AppCompatActivity {
     private Button prevButton;
     private LifecycleOwner activity = this;
     private RegisterFormViewModel registerFormViewModel;
+    RegisterMessage registerMessage;
 
     private Bitmap bitmap;
 
     public Bitmap getProfileImage(){
         return this.bitmap;
+    }
+
+    private boolean sendRegisterMessage(RegisterMessage registerMessage){
+        this.registerMessage = registerMessage;
+        SendRegisterMessageThread thread = new SendRegisterMessageThread();
+        thread.start();
+        try {synchronized(thread){
+            thread.join();
+        }
+        }
+        catch (InterruptedException e) {
+            return false;
+        }
+
+        return true;
     }
 
     private void insertUserData(RegisterFormViewModel inputViewModel){
@@ -58,6 +76,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String date = simpleDateFormat.format(new Date());
+
+        byte[] bytesProfile = getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile());
+        // todo: 여기서 호출 합니다.
+        sendRegisterMessage(new RegisterMessage(bytesProfile,
+                                                inputViewModel.getNewUserData().getNickname(),
+                                                inputViewModel.getNewUserData().getEmail(),
+                                                inputViewModel.getNewUserData().getPhoneNumber(),
+                                                inputViewModel.getNewUserData().getIsOld(),
+                                                date));
 
         // Log.d("register",inputViewModel.getNewUserData().getNickname());
         //   Log.d("register",inputViewModel.getNewUserData().getEmail());
@@ -79,6 +106,15 @@ public class RegisterActivity extends AppCompatActivity {
         sqLiteDatabase.insert(TABLE,null,contentValues);
 
         sqLiteDatabase.close();
+    }
+
+    class SendRegisterMessageThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+
+        // todo: 레지스터 데이터 여기서 보냅니다.
+        }
     }
 
     @Override
