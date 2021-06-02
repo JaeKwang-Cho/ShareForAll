@@ -40,6 +40,7 @@ import com.dorasima.shareforall.R;
 import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.model.LoggedInUser;
+import com.dorasima.shareforall.data.model.LoginAttemptMessage;
 import com.dorasima.shareforall.data.model.Message;
 import com.dorasima.shareforall.ui.find.FindActivity;
 import com.dorasima.shareforall.ui.main.MainActivity;
@@ -59,6 +60,58 @@ public class LoginActivity extends AppCompatActivity {
     String [] permission_list = {
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
+
+    private boolean sendLoginAttemptMessage(final LoginAttemptMessage loginAttemptMessage){
+        // todo: 여기에서 로그인 요청을 보내기
+        return false;
+    }
+
+    private boolean getAuthentication(String email, String password) {
+
+        // todo: 여기서 로그인 원래 입력을 받고 인증을 부여합니다
+        boolean isCorrect = sendLoginAttemptMessage(new LoginAttemptMessage(email,password));
+        if(isCorrect){
+            // todo: 여기서 loggedInUser 에다가, LoginMessage 값을 넣어주면 됩니다. 그리고 true 반환
+        }
+
+        // 아래는 원래 있었던 코드니 무시
+        Log.d("login", email); Log.d("login", password);
+        DBClass dbClass = new DBClass(getApplication());
+        SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
+
+        String sql1 = "select * from " + TABLE; Cursor cursor = sqLiteDatabase.rawQuery(sql1, null);
+
+        // SQL 아직도 잘 모르겠음..
+        cursor.moveToFirst(); while (cursor.moveToNext()) {
+            int em_pos = cursor.getColumnIndex(EMAIL);
+            String em = cursor.getString(em_pos);
+            Log.d("login", em);
+            int pw_pos = cursor.getColumnIndex(PASSWORD);
+            String pw = cursor.getString(pw_pos);
+            Log.d("login", pw);
+            if (email.equals(em) && password.equals(pw)) {
+                int nn_pos = cursor.getColumnIndex(NICKNAME);
+                String nn = cursor.getString(nn_pos);
+                Log.d("login", nn);
+                int pn_pos = cursor.getColumnIndex(PHONE_NUMBER);
+                String pn = cursor.getString(pn_pos);
+                Log.d("login", pn);
+                int age_pos = cursor.getColumnIndex(AGE);
+                Integer age = cursor.getInt(age_pos);
+                Log.d("login", age.toString());
+                int date_pos = cursor.getColumnIndex(DATE);
+                String date = cursor.getString(date_pos);
+                Log.d("login", date);
+                int profile_pos = cursor.getColumnIndex(PROFILE);
+                Drawable profile = new BitmapDrawable(getResources(),getBitmap(cursor.getBlob(profile_pos)));
+
+                loggedInUser = new LoggedInUser(profile,nn, email, pn, age, date);
+
+                return true;
+            }
+        } return false;
+    }
+
 
     public void breakInBtn(View view){
         Intent intent = new Intent(this, MainActivity.class);
@@ -250,43 +303,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent find = new Intent(getApplicationContext(), FindActivity.class); startActivity(find);
     }
 
-    private boolean getAuthentication(String email, String password) {
-        Log.d("login", email); Log.d("login", password);
-        DBClass dbClass = new DBClass(getApplication());
-        SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
-
-        String sql1 = "select * from " + TABLE; Cursor cursor = sqLiteDatabase.rawQuery(sql1, null);
-
-        // SQL 아직도 잘 모르겠음..
-        cursor.moveToFirst(); while (cursor.moveToNext()) {
-            int em_pos = cursor.getColumnIndex(EMAIL);
-            String em = cursor.getString(em_pos);
-            Log.d("login", em);
-            int pw_pos = cursor.getColumnIndex(PASSWORD);
-            String pw = cursor.getString(pw_pos);
-            Log.d("login", pw);
-            if (email.equals(em) && password.equals(pw)) {
-                int nn_pos = cursor.getColumnIndex(NICKNAME);
-                String nn = cursor.getString(nn_pos);
-                Log.d("login", nn);
-                int pn_pos = cursor.getColumnIndex(PHONE_NUMBER);
-                String pn = cursor.getString(pn_pos);
-                Log.d("login", pn);
-                int age_pos = cursor.getColumnIndex(AGE);
-                Integer age = cursor.getInt(age_pos);
-                Log.d("login", age.toString());
-                int date_pos = cursor.getColumnIndex(DATE);
-                String date = cursor.getString(date_pos);
-                Log.d("login", date);
-                int profile_pos = cursor.getColumnIndex(PROFILE);
-                Drawable profile = new BitmapDrawable(getResources(),getBitmap(cursor.getBlob(profile_pos)));
-
-                loggedInUser = new LoggedInUser(profile,nn, email, pn, age, date);
-
-                return true;
-            }
-        } return false;
-    }
     public Bitmap getBitmap(byte[] bytes){
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0, bytes.length);
         return bitmap;

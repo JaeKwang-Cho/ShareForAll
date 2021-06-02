@@ -52,6 +52,34 @@ public class RegisterActivity extends AppCompatActivity {
         return this.bitmap;
     }
 
+    private void insertUserData(RegisterFormViewModel inputViewModel){
+        DBClass dbClass = new DBClass(getApplicationContext());
+        SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String date = simpleDateFormat.format(new Date());
+
+        // Log.d("register",inputViewModel.getNewUserData().getNickname());
+        //   Log.d("register",inputViewModel.getNewUserData().getEmail());
+        //  Log.d("register",inputViewModel.getNewUserData().getPassword());
+        //   Log.d("register",inputViewModel.getNewUserData().getPhoneNumber());
+        //   Log.d("register",inputViewModel.getNewUserData().getIsOld().toString());
+        //    Log.d("register",date);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(NICKNAME,inputViewModel.getNewUserData().getNickname());
+        contentValues.put(EMAIL,inputViewModel.getNewUserData().getEmail());
+        contentValues.put(PASSWORD,inputViewModel.getNewUserData().getPassword());
+        contentValues.put(PHONE_NUMBER,inputViewModel.getNewUserData().getPhoneNumber());
+        contentValues.put(AGE,inputViewModel.getNewUserData().getIsOld());
+        contentValues.put(DATE,date);
+        contentValues.put(PROFILE,getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile()));
+
+
+        sqLiteDatabase.insert(TABLE,null,contentValues);
+
+        sqLiteDatabase.close();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,34 +148,6 @@ public class RegisterActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
-    }
-    private void insertUserData(RegisterFormViewModel inputViewModel){
-        DBClass dbClass = new DBClass(getApplicationContext());
-        SQLiteDatabase sqLiteDatabase = dbClass.getWritableDatabase();
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String date = simpleDateFormat.format(new Date());
-
-        Log.d("register",inputViewModel.getNewUserData().getNickname());
-        Log.d("register",inputViewModel.getNewUserData().getEmail());
-        Log.d("register",inputViewModel.getNewUserData().getPassword());
-        Log.d("register",inputViewModel.getNewUserData().getPhoneNumber());
-        Log.d("register",inputViewModel.getNewUserData().getIsOld().toString());
-        Log.d("register",date);
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(NICKNAME,inputViewModel.getNewUserData().getNickname());
-        contentValues.put(EMAIL,inputViewModel.getNewUserData().getEmail());
-        contentValues.put(PASSWORD,inputViewModel.getNewUserData().getPassword());
-        contentValues.put(PHONE_NUMBER,inputViewModel.getNewUserData().getPhoneNumber());
-        contentValues.put(AGE,inputViewModel.getNewUserData().getIsOld());
-        contentValues.put(DATE,date);
-        contentValues.put(PROFILE,getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile()));
-
-
-        sqLiteDatabase.insert(TABLE,null,contentValues);
-
-        sqLiteDatabase.close();
     }
     public void getImageBtn(){
         Intent intent = new Intent(Intent.ACTION_PICK);
