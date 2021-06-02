@@ -28,6 +28,7 @@ public class DummyContent {
     public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.nickname, item);
+
     }
     public static DummyItem getDummyItem(int pos){
         return ITEMS.get(pos);

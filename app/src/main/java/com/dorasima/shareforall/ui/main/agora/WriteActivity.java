@@ -29,8 +29,6 @@ import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 
 public class WriteActivity extends AppCompatActivity {
 
-
-
     private ImageView selected_image;
     private Button select_image;
     private Button finish;

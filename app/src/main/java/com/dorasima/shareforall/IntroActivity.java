@@ -34,8 +34,6 @@ public class IntroActivity extends AppCompatActivity {
         bar.setTitle("");
         init();
         handler.postDelayed(runnable,2000);
-
-
     }
     private void init(){
         handler = new Handler();

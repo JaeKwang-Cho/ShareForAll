@@ -1,18 +1,16 @@
 package com.dorasima.shareforall.data.model;
 
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 
-public class LoginMessage implements Serializable {
-    private Drawable profile;
+public class RegisterMessage implements Serializable {
+    private byte[] profile;
     private String nickName;
     private String email;
     private String phoneNumber;
     private Integer isOld;
     private String date;
 
-    public LoginMessage(LoginMessage input){
+    public RegisterMessage(RegisterMessage input){
         this.profile = input.profile;
         this.nickName = input.nickName;
         this.email = input.email;
@@ -21,7 +19,7 @@ public class LoginMessage implements Serializable {
         this.date = input.date;
     }
 
-    public LoginMessage(Drawable profile, String nickName, String email, String phoneNumber, Integer isOld, String date) {
+    public RegisterMessage(byte[] profile, String nickName, String email, String phoneNumber, Integer isOld, String date) {
         this.profile = profile;
         this.nickName = nickName;
         this.email = email;
@@ -29,4 +27,5 @@ public class LoginMessage implements Serializable {
         this.isOld = isOld;
         this.date = date;
     }
+
 }
