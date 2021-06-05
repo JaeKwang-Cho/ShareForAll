@@ -88,6 +88,8 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
 
+        getSupportActionBar().hide();
+
         loggedInUser = getIntent().getParcelableExtra("loggedUser");
 
         selected_image = findViewById(R.id.selected_image);

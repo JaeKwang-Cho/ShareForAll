@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="#64BEA0"
     tools:context=".ui.register.RegisterForm2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,16 +31,20 @@
             <TextView
                 android:id="@+id/phone_number"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:textColor="#FFFFFF"
                 android:text="@string/put_phone_number" />
 
             <EditText
                 android:id="@+id/phone_number_form"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:ems="10"
                 android:hint="@string/phone_number"
                 android:inputType="numberDecimal"
+                android:fontFamily="@font/dxganlgrum"
                 android:selectAllOnFocus="true" />
         </LinearLayout>
 
@@ -53,16 +58,20 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintTop_toBottomOf="@+id/phone_number_container">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:textColor="#FFFFFF"
                 android:text="@string/put_age" />
 
             <RadioGroup
                 android:id="@+id/age_group"
+                android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -70,12 +79,14 @@
                     android:id="@+id/elderlyButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxganlgrum"
                     android:text="@string/elderly" />
 
                 <RadioButton
                     android:id="@+id/youngButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxganlgrum"
                     android:text="@string/young" />
             </RadioGroup>
         </LinearLayout>
@@ -89,7 +100,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="#339966"
+            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintTop_toBottomOf="@+id/register_select"
+            android:textColor="#FFFFFF"
             app:layout_constraintVertical_bias="0.212" />
 
         <ImageView
@@ -101,14 +115,16 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/age_container"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/siva" />
 
         <Button
             android:id="@+id/register_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/dxganlgrum"
             android:text="select image"
+            app:backgroundTint="#339966"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_profile" />

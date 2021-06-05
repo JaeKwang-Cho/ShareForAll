@@ -10,4 +10,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.main.comments.CommentsFragment"
+    android:background="#f2f2f7"
     tools:listitem="@layout/fragment_item" />

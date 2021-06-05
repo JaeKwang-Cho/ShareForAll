@@ -7,9 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.dorasima.shareforall.R;
-import com.dorasima.shareforall.data.LoginRepository;
 import com.dorasima.shareforall.data.model.LoggedInUser;
-import com.dorasima.shareforall.ui.main.agora.dummy.DummyContent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -18,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 
 import com.dorasima.shareforall.ui.main.ui.main.SectionsPagerAdapter;
@@ -41,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         return this.loggedInUser;
     }
 
+    private Drawable AdditionOn;
+    private Drawable AdditionOff;
+    private Drawable AgoraOn;
+    private Drawable AgoraOff;
+    private Drawable MyPageOn;
+    private Drawable MyPageOff;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
@@ -50,13 +55,29 @@ public class MainActivity extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
-        sectionsPagerAdapter.addFragment(additionFragment, "Addition");
-        sectionsPagerAdapter.addFragment(agoraFragment, "Agora");
-        sectionsPagerAdapter.addFragment(mypageFragment, "Mypage");
+        AdditionOn = getResources().getDrawable(android.R.drawable.btn_star);
+        //AdditionOff = getResources().getDrawable(android.R.drawable.star_off);
 
-        viewPager.setAdapter(sectionsPagerAdapter); viewPager.setCurrentItem(1);
+        AgoraOn = getResources().getDrawable(R.drawable.agora_unselected);
+       // AgoraOff = getResources().getDrawable(R.drawable.arora);
 
-        TabLayout tabs = findViewById(R.id.tabs); tabs.setupWithViewPager(viewPager);
+        MyPageOn = getResources().getDrawable(android.R.drawable.ic_dialog_info);
+       // MyPageOff = getResources().getDrawable(android.R.drawable.ic_menu_info_details);
+
+
+        sectionsPagerAdapter.addFragment(additionFragment, AdditionOn);
+        sectionsPagerAdapter.addFragment(agoraFragment, AgoraOn);
+        sectionsPagerAdapter.addFragment(mypageFragment, AgoraOn);
+
+        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setCurrentItem(1);
+
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+
+        tabs.getTabAt(0).setIcon(AdditionOn);
+        tabs.getTabAt(1).setIcon(AgoraOn);
+        tabs.getTabAt(2).setIcon(MyPageOn);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

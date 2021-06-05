@@ -28,12 +28,14 @@
                 android:id="@+id/title_article"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/dxganlgrum"
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/nickname_article"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/dxganlgrum"
                 android:text="TextView" />
         </LinearLayout>
     </LinearLayout>
@@ -51,6 +53,7 @@
         android:layout_width="285dp"
         android:layout_height="155dp"
         android:text="TextView"
+        android:fontFamily="@font/dxganlgrum"
         tools:layout_editor_absoluteX="77dp"
         tools:layout_editor_absoluteY="531dp" />
 

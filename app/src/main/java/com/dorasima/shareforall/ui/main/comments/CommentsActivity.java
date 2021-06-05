@@ -33,6 +33,8 @@ public class CommentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
 
+        getSupportActionBar().hide();
+
         userInfo = getIntent().getParcelableExtra("loggedUser");
 
         FragmentManager fragmentManager = getSupportFragmentManager();

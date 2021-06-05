@@ -31,6 +31,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         ActionBar bar = getSupportActionBar();
         bar.setTitle("");
+        bar.hide();
         init();
         handler.postDelayed(runnable,2000);
     }

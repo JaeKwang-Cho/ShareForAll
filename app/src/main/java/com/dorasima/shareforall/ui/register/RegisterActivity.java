@@ -77,7 +77,13 @@ public class RegisterActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String date = simpleDateFormat.format(new Date());
 
-        byte[] bytesProfile = getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile());
+        byte[] bytesProfile;
+
+        if(inputViewModel.getNewUserData().getProfile() == null){
+            bytesProfile = getByteArrayFromDrawable(this.getResources().getDrawable(R.drawable.puppy));
+        }else{
+            bytesProfile = getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile());
+        }
         // todo: 여기서 호출 합니다.
         sendRegisterMessage(new RegisterMessage(bytesProfile,
                                                 inputViewModel.getNewUserData().getNickname(),
@@ -100,7 +106,9 @@ public class RegisterActivity extends AppCompatActivity {
         contentValues.put(PHONE_NUMBER,inputViewModel.getNewUserData().getPhoneNumber());
         contentValues.put(AGE,inputViewModel.getNewUserData().getIsOld());
         contentValues.put(DATE,date);
-        contentValues.put(PROFILE,getByteArrayFromDrawable(inputViewModel.getNewUserData().getProfile()));
+        contentValues.put(PROFILE,bytesProfile);
+
+
 
 
         sqLiteDatabase.insert(TABLE,null,contentValues);
@@ -127,6 +135,8 @@ public class RegisterActivity extends AppCompatActivity {
         // 뷰
         nextButton = findViewById(R.id.register_next);
         prevButton = findViewById(R.id.register_prev);
+
+        getSupportActionBar().hide();
 
         // 이미 존재하는 viewModel 검색
         registerFormViewModel = new ViewModelProvider(this).get(RegisterFormViewModel.class);

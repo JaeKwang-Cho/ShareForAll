@@ -1,6 +1,7 @@
 package com.dorasima.shareforall.ui.main.ui.main;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -19,16 +20,16 @@ import java.util.List;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Drawable> mFragmentTitleList = new ArrayList<>();
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, Drawable icon){
         mFragmentList.add(fragment);
-        mFragmentTitleList.add(title);
+        mFragmentTitleList.add(icon);
     }
     @Override
     public Fragment getItem(int position) { return mFragmentList.get(position); }
@@ -38,6 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return mFragmentList.size() ;
     }
     public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
+        return null;
     }
+
 }

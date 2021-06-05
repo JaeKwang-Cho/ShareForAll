@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="#64BEA0"
     tools:context=".ui.register.RegisterForm">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,14 +30,18 @@
             <TextView
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/put_nickname" />
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:text="@string/put_nickname"
+                android:textColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/nickname_form"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="@font/dxganlgrum"
                 android:hint="@string/nickname"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="true" />
@@ -57,16 +62,20 @@
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:textColor="#FFFFFF"
                 android:text="@string/put_email" />
 
             <EditText
                 android:id="@+id/email_form"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:hint="@string/email"
                 android:inputType="textWebEmailAddress"
+                android:background="#FFFFFF"
+                android:fontFamily="@font/dxganlgrum"
                 android:selectAllOnFocus="true" />
         </LinearLayout>
 
@@ -86,14 +95,18 @@
             <TextView
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:textColor="#FFFFFF"
                 android:text="@string/put_passwords" />
 
             <EditText
                 android:id="@+id/password_form"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="@font/dxganlgrum"
                 android:hint="@string/passwords"
                 android:inputType="textPassword"
                 android:selectAllOnFocus="true" />
@@ -116,14 +129,18 @@
             <TextView
                 android:id="@+id/password2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/dxganlgrum"
+                android:textColor="#FFFFFF"
                 android:text="@string/put_passwords_again" />
 
             <EditText
                 android:id="@+id/password2_form"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:ems="10"
+                android:fontFamily="@font/dxganlgrum"
                 android:hint="@string/passwords"
                 android:inputType="textPassword"
                 android:selectAllOnFocus="true" />
@@ -131,17 +148,23 @@
 
         <TextView
             android:id="@+id/precaution1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="376dp"
+            android:layout_height="155dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="32dp"
             android:layout_marginRight="12dp"
             android:layout_marginBottom="32dp"
+            android:background="#339966"
+            android:fontFamily="@font/dxganlgrum"
             android:text="@string/precaution1"
+            android:textColor="#FFFFFF"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.342"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password2_container" />
+            app:layout_constraintTop_toBottomOf="@+id/password2_container"
+            app:layout_constraintVertical_bias="0.115" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

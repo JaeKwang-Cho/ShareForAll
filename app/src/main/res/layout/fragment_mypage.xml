@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F2F2F7"
     tools:context=".ui.main.mypage.MypageFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +44,7 @@
                     android:id="@+id/Mypage_userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxganlgrum"
                     android:layout_weight="1"
                     android:text="TextView" />
 
@@ -50,6 +52,7 @@
                     android:id="@+id/Mypage_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/dxganlgrum"
                     android:layout_weight="1"
                     android:text="TextView" />
             </LinearLayout>
@@ -64,6 +67,7 @@
             app:layout_constraintBottom_toTopOf="@+id/Mypage_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
+            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -75,6 +79,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
+            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

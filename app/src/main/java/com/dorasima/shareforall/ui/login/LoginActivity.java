@@ -179,6 +179,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_login);
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
+        getSupportActionBar().hide();
+
         Message msg = new Message();
         msg.setMsg1("start","1234","Email");
         Client client = new Client(msg);

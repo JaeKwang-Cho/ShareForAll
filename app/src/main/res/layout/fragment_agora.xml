@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="asdf"
+            android:fontFamily="@font/dxganlgrum"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="asdf"
+            android:fontFamily="@font/dxganlgrum"
             android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>
 
