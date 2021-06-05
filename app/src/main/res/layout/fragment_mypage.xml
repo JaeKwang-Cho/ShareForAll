@@ -63,11 +63,12 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/dxganlgrum"
             android:text="support"
+            app:backgroundTint="#339966"
             app:layout_constraintBottom_toTopOf="@+id/Mypage_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
-            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -75,11 +76,12 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginBottom="48dp"
+            android:fontFamily="@font/dxganlgrum"
             android:text="logout"
+            app:backgroundTint="#339966"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
-            android:fontFamily="@font/dxganlgrum"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

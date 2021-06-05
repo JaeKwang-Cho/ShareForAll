@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#F2F2F7"
     tools:context=".ui.main.agora.ArticleActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="136dp"
-        android:orientation="horizontal">
+        android:id="@+id/linearLayout2"
+        android:layout_width="280dp"
+        android:layout_height="92dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/profile_article"
@@ -19,8 +25,8 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
-            android:layout_width="217dp"
-            android:layout_height="78dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="84dp">
 
@@ -42,26 +48,37 @@
 
     <ImageView
         android:id="@+id/icon_article"
-        android:layout_width="256dp"
-        android:layout_height="264dp"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="223dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/content_article"
-        android:layout_width="285dp"
-        android:layout_height="155dp"
-        android:text="TextView"
+        android:layout_width="366dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/dxganlgrum"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="531dp" />
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_article" />
 
     <Button
         android:id="@+id/comments_article"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="253dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="10dp"
         android:text="comments"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="634dp" />
-</LinearLayout>
+        app:backgroundTint="#339966"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content_article"
+        app:layout_constraintVertical_bias="0.18" />
+</androidx.constraintlayout.widget.ConstraintLayout>
