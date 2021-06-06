@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dorasima.shareforall.R;
+import com.dorasima.shareforall.data.Client;
 import com.dorasima.shareforall.data.DBClass;
 import com.dorasima.shareforall.data.model.RegisterMessage;
 
@@ -57,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean sendRegisterMessage(RegisterMessage registerMessage){
         this.registerMessage = registerMessage;
-        SendRegisterMessageThread thread = new SendRegisterMessageThread();
+        SendRegisterMessageThread thread = new SendRegisterMessageThread(registerMessage);
         thread.start();
         try {synchronized(thread){
             thread.join();
@@ -109,11 +110,21 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     class SendRegisterMessageThread extends Thread{
+        RegisterMessage Regisger;
+
+        public SendRegisterMessageThread(RegisterMessage regisger)
+        {
+            this.Regisger = regisger;
+        }
+
         @Override
         public void run() {
             super.run();
 
         // todo: 레지스터 데이터 여기서 보냅니다.
+            Client client = new Client();
+            client.setType5(this.Regisger);
+            client.run();
         }
     }
 

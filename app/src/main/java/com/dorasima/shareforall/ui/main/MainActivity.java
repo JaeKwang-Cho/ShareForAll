@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Message msg = new Message();
-        msg.setMsg1("start","1234","Email");
-        Client client = new Client(msg);
-        client.start();
-
         super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
         ViewPager viewPager = findViewById(R.id.view_pager);
 

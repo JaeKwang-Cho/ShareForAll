@@ -1,6 +1,9 @@
 package com.dorasima.shareforall.data;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Message implements Serializable {
 
@@ -17,6 +20,7 @@ public class Message implements Serializable {
     private String PhoneNumber = "-1";
     private String Age = "-1";
     private String Date = "-1";
+    private Message message = new Message();
 
     public void setMsg1(String nickName, String passWord, String Date)
     {

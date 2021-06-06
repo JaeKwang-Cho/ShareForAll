@@ -28,4 +28,7 @@ public class RegisterMessage implements Serializable {
         this.date = date;
     }
 
+    public String getEmail() {
+        return email;
+    }
 }
