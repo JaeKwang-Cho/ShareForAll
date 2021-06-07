@@ -24,6 +24,8 @@ public class FindActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
 
+        getSupportActionBar().hide();
+
         prevButton = findViewById(R.id.find_prev);
         sendButton = findViewById(R.id.find_send);
         emailForm = findViewById(R.id.find_emailForm);
