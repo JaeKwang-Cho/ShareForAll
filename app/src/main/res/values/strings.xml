@@ -45,7 +45,8 @@
     <string name="register_complete">register complete</string>
     <!-- Strings related to find-->
     <string name="send">send</string>
-    <string name="put_email_to_find">Enter your email (used in registration)</string>
+    <string name="put_email_to_find">
+        Enter your email (used in registration)</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
