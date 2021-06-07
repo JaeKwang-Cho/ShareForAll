@@ -233,7 +233,6 @@ public class LoginActivity extends AppCompatActivity {
                 // ActivityForResult의 콜백
                 setResult(Activity.RESULT_OK);
 
-                finish(); // 일단은 종료
             }
         });
 
