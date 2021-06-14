@@ -41,6 +41,12 @@ public class CommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyCommentsRecyclerViewAdapter adapter;
 
+    private static String[] name = {"Ace", "Barbie", "Champ", "Diallo", "Champ", "Favian", "Grace", "Harley"};
+    private static Drawable[] profiles;
+    private static String[] comments = {"I don't trust them", "that's taking too long",
+                                        "my wife is better than you, Dude", "grandfather? I will defeat you cleanly.",
+                                        "Haha, That's funny kids","Just for trailer", "Hmm...", "you're being fooled again"};
+
     private CommentMessage.ServerCommentsItem newServerComments = null;
 
     public CommentsFragment() {
@@ -69,6 +75,20 @@ public class CommentsFragment extends Fragment {
                 Drawable profile = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(item.profile, 0, item.profile.length));
                 COMMENTS.add(new CommentsContent.CommentsItem(profile,item.nickname,item.comments));
             }
+        }
+
+        profiles = new Drawable[8];
+        profiles[0] = getResources().getDrawable(R.drawable.p1);
+        profiles[1] = getResources().getDrawable(R.drawable.p2);
+        profiles[2] = getResources().getDrawable(R.drawable.p6);
+        profiles[3] = getResources().getDrawable(R.drawable.p4);
+        profiles[4] = getResources().getDrawable(R.drawable.p6);
+        profiles[5] = getResources().getDrawable(R.drawable.p3);
+        profiles[6] = getResources().getDrawable(R.drawable.p7);
+        profiles[7] = getResources().getDrawable(R.drawable.p8);
+        for (int i = 0; i < 8; i++) {
+            CommentsContent.CommentsItem item = new CommentsContent.CommentsItem(profiles[i],name[i],comments[i]);
+            CommentsContent.COMMENTS.add(item);
         }
 
     }

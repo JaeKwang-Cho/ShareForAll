@@ -34,6 +34,8 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
+        getSupportActionBar().hide();
+
         article = getIntent().getParcelableExtra("article");
 
         nickname = findViewById(R.id.nickname_article);

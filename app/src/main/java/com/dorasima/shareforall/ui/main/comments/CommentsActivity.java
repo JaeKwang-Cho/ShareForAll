@@ -80,7 +80,7 @@ public class CommentsActivity extends AppCompatActivity {
             // 사용자가 입력한 문자열을 가져온다.
             String comments = editText1.getText().toString();
 
-            CommentsContent.addItem(CommentsContent.createCommentsItem(userInfo.getProfile(), userInfo.getNickname(), comments));
+            CommentsContent.addItem(CommentsContent.createCommentsItem(getResources().getDrawable(R.drawable.hj), "Hyunji", comments));
         }
     }
 }
